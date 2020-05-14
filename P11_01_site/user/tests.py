@@ -50,3 +50,16 @@ class LogoutTestCase(TestCase):
         response = self.client.get(reverse('logout'))
         self.assertEqual(response.status_code, 302)
 
+class ContactTestCase(TestCase):
+    def setUp(self):
+        username = "marc"
+        email = "aflf@gmail.com"
+        message = "ok"
+        self.form = {'username': username,
+                    'email': email,
+                    'message': message,
+                    }
+
+    def test_index(self):
+        response = self.client.post(reverse('index'), self.form)
+        self.assertEqual(response.status_code, 200)
