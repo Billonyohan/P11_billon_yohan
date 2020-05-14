@@ -6,9 +6,54 @@ from .forms import LoginForm, NewAccount
 from django.template import loader
 from django.contrib import messages
 from django.contrib import auth
+from django.core.mail import EmailMessage
+from off.models import Contact
+from user.forms import ContactForm
+
 
 def index(request):
-    return render(request, 'off/index.html')
+    form = ContactForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            user = form.cleaned_data['user']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            email_body = """\
+                <html>
+                  <head></head>
+                  <body>
+                    <p><strong><span style="text-decoration: underline;">Nom d'utilisateur :</span></strong> %s</p>
+                    <p>&nbsp;</p>
+                    <p><strong><span style="text-decoration: underline;">Email :</span></strong> %s</p>
+                    <p>&nbsp;</p>
+                    <p><strong><span style="text-decoration: underline;">Message :</span></strong> %s</p>
+                    <p>&nbsp;</p>
+                  </body>
+                </html>
+                """ % (user, email, message)
+            email_response = """\
+                <html>
+                    <head></head>
+                    <body>
+                        <div class="col-lg-10" style="margin-bottom: auto; margin-top: auto;">
+                            <h1 style="text-align: center;">Votre message a bien été pris en compte</h1>
+                            <h3 style="text-align: center;">Notre équipe vous repondra dans les plus brefs délais</h3>
+                        </div>
+                    </body>
+                </html>
+                """
+            email_info = EmailMessage('Mail from contact!', email_body, to=['purbeurre.paris@gmail.com'])
+            email_info.content_subtype = "html" # this is the crucial part 
+            email_info.send()
+            email_info_costumer = EmailMessage('Pure Beurre - Message recu', email_response, to=[email])
+            email_info_costumer.content_subtype = "html"
+            email_info_costumer.send()
+            info = "Message envoyé"
+            contact = Contact.objects.create(user=user, email=email, message=message)
+            contact.save()
+            return render(request, 'off/index.html', {'info': info})
+    else:
+        return render(request, 'off/index.html', {'form': form})
 
 
 @login_required
