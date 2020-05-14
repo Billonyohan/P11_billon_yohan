@@ -1,0 +1,32 @@
+{% extends 'off/base.html' %}
+
+{% block title %}
+  - Créer un compte
+{% endblock %}
+
+<!-- page for new account -->
+{% block content %}
+  <section class="form-connexion">
+    <div class="container">
+      <h2 class="text-center">Créer un compte</h2>
+      <hr class="divider my-4">
+      <form method="post">
+        <!-- csrf security token -->
+        {% csrf_token %}
+        <!-- generate form -->
+        {% for field in form %}
+          <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            <!-- error message -->
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <div id="butt"><button class="btn btn-primary" type="submit">Créer mon compte</button></div>
+      </form>
+    </div>
+  </section>
+{% endblock %}
+

@@ -1,0 +1,70 @@
+{% extends 'off/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Page result search -->
+<!-- test if no result food -->
+{% if nofoods %}
+  <h1 id="nofood">{{ nofoods }}</h1>
+  <div class="row"></div>
+  <form class="col-md-8 col-md-offset-2" id="noResult" class="form-control" name="query" action="{% url 'result_search' %}" method="get" accept-charset="utf-8">
+  <div class="form-group">
+    <input id="searchForm" class="form-control" name="query" placeholder="Rechercher un produit">
+  </div>
+  <div class="col-md-12 text-center"> 
+    <button class="btn btn-secondary center-block" id="colorButton" type="submit">Rechercher</button>
+  </div>
+  </form>
+{% else %}
+  <div class="row">
+    <!-- if food -->
+  {% for food in foods %}
+  	<section class="page-section h-auto col-md-4 col-sm-12my-auto justify-content-center text-center">
+      <!-- food nutriscore -->
+      <div class="product_block mx-auto">
+        {% if food.nutriscore == 'a' %}
+          <img src="{% static 'off/img/nutriscore-a.png' %}" alt="nutriscore" id="nutriscore" class="img-responsive my-auto text-center">
+        {% elif food.nutriscore == 'b' %}
+          <img src="{% static 'off/img/nutriscore-b.png' %}" alt="nutriscore" id="nutriscore" class="img-responsive my-auto text-center">
+        {% elif food.nutriscore == 'c' %}
+          <img src="{% static 'off/img/nutriscore-b.png' %}" alt="nutriscore" id="nutriscore" class="img-responsive my-auto text-center">
+        {% elif food.nutriscore == 'd' %}
+          <img src="{% static 'off/img/nutriscore-d.png' %}" alt="nutriscore" id="nutriscore" class="img-responsive my-auto text-center">
+        {% elif food.nutriscore == 'e' %}
+          <img src="{% static 'off/img/nutriscore-e.png' %}" alt="nutriscore" id="nutriscore" class="img-responsive my-auto text-center">
+        {% endif %}
+	  		  <img src="{{ food.image_product }}" alt="image_product" id="image_product" class="img-responsive my-auto text-center">
+          <div class="form-group">
+            <!-- description button food -->
+            <form class="col-md-12 text-center" id="searchForm" class="form-control" name="details" action="{% url 'description' %}" method="get" accept-charset="utf-8">
+              <button class="btn savebtn" id="searchForm" class="form-control" name="details" value="{{ food }}"><i class="fas fa-info-circle"></i>Description</button></form>
+            <!-- substitute button -->
+            <form class="col-md-12 text-center" id="searchForm" class="form-control" name="foods_subtitute" action="{% url 'substitute' %}" method="get" accept-charset="utf-8">
+              <button class="btn savebtn" id="searchForm" class="form-control2" name="foods_subtitute" value="{{ food }}"><i class="fas fa-info-circle"></i>Substituts
+              <input type="hidden" id="searchForm" name="saved_substitute2" value="{{food.id}}"></button></form>
+            <h2 class="intro-text text-center">{{ food }}</h2>
+          </div>
+		   </div>
+  	</section>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- pagination for result page -->
+<div class="pagination">
+<span class="step-links" style="margin: 0 auto;">
+    {% if foods.has_previous %}
+        <a href="?query={{ foods2 }}&page=1">&laquo; Début</a>
+        <a href="?query={{ foods2 }}&page={{ foods.previous_page_number }}">Précédent</a>
+    {% endif %}
+
+    <span class="current">
+        Page {{ foods.number }} sur {{ foods.paginator.num_pages }}.
+    </span>
+
+    {% if foods.has_next %}
+        <a href="?query={{ foods2 }}&page={{ foods.next_page_number }}">Suivant</a>
+        <a href="?query={{ foods2 }}&page={{ foods.paginator.num_pages }}">Fin &raquo;</a>
+    {% endif %}
+</span>
+</div>
+{% endblock %}

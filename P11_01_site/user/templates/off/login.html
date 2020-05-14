@@ -1,0 +1,31 @@
+{% extends 'off/base.html' %}
+
+{% block title %}
+  - Connexion
+{% endblock %}
+
+{% block content %}
+  
+<section class="frame">
+  <div class="container">
+    <h2 class="text-center">Connexion</h2>
+    <hr class="divider my-4">
+    <form method="POST">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+        </div>
+      {% endfor %}
+      {% if messages %}
+        {% for message in messages %}
+        <font class="messages" color="red">{{ message }}</font> 
+        {% endfor %}
+      {% endif %}
+      <button class="btn btn-primary" type="submit">Se connecter</button>
+      <a href="{% url 'new_account' %}">Créer un compte</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

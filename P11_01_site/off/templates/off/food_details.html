@@ -1,0 +1,47 @@
+{% extends 'off/base.html' %}
+{% load static %}
+{% block content %}
+<!-- food details page -->
+{% for food in foods %}
+	<section class="page-section h-auto">
+		<div class="container">
+			<!-- food name -->
+			<h1 class="intro-text text-center" id="title_food" >{{ food }}</h1>
+			<hr class="divider2 my-4">
+			<div class="row">
+				<div class="col-4 justify-content-center text-center">
+		       		<div class="product_block mx-auto">	
+		       			<!-- food nutriscore -->
+				  		<img src="{{ food.image_product }}" alt="image_product" id="image_details" class="img-responsive my-auto text-center">
+				  		<a href="{{ food.image_ingredients }}"><img src="{{ food.image_ingredients }}" alt="image_ingredients" id="image_details" class="img-responsive my-auto text-center"></a>
+				  		{% if food.nutriscore == 'a' %}
+		                  	<img src="{% static 'off/img/nutriscore-a.png' %}" alt="nutriscore" id="nutriscore2" class="img-responsive my-auto text-center">
+		                {% elif food.nutriscore == 'b' %}
+		                  	<img src="{% static 'off/img/nutriscore-b.png' %}" alt="nutriscore" id="nutriscore2" class="img-responsive my-auto text-center">
+		                {% elif food.nutriscore == 'c' %}
+		                  	<img src="{% static 'off/img/nutriscore-b.png' %}" alt="nutriscore" id="nutriscore2" class="img-responsive my-auto text-center">
+		                {% elif food.nutriscore == 'd' %}
+		                  	<img src="{% static 'off/img/nutriscore-d.png' %}" alt="nutriscore" id="nutriscore2" class="img-responsive my-auto text-center">
+		                {% elif food.nutriscore == 'e' %}
+		                  	<img src="{% static 'off/img/nutriscore-e.png' %}" alt="nutriscore" id="nutriscore2" class="img-responsive my-auto text-center">
+		                {% endif %}
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-7 justify-content-center text-center" id="description">
+					<div class="row"></div>
+					<h1>Ingrédients</h1>
+						<!-- food ingredients -->
+						<div id="space_details">{{ food.ingredients }}</div>
+					<h1 id="space_details">Magasin</h2>
+						<!-- link store -->
+						<div id="space_details">{{ food.store }}</div>
+					<div class="button" onclick="window.location.href='{{ food.link }}';">
+						<button class="btn" id="buttonoff">Lien openfoodfacts</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endfor %}
+{% endblock %}
