@@ -73,6 +73,24 @@
               <div class="row" style="margin-bottom: 50px;"></div>
             </div>
             <div class="col-lg-2"></div>
+            {% if info  %}
+              <div class="col-lg-5 text-center" style="margin-bottom: auto; margin-top: auto;">
+                <i class="far fa-share-square fa-3x mb-3 text-muted"></i>
+                <h1>{{ info }}</h1>
+              </div>
+            {% else %}
+              <form class="col-lg-5 text-center" method="post" action="{% url 'index' %}">
+                {% csrf_token %}
+                {% for field in form %}
+                  <div class="form-group">
+                    {{ field.label_tag }}
+                    <div class="row"></div>
+                    {{ field }}
+                  </div>
+                {% endfor %}
+                <div id="butt"><button class="btn btn-primary" style="text-align: center;" type="submit">Envoyer</button></div>
+              </form>
+            {% endif %}
         </div>
       </div>
   </section>

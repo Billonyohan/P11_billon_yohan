@@ -33,3 +33,15 @@ class Substitute(models.Model):
     def __str__(self):
         return '%s' % (self.user.username)
 
+
+class Contact(models.Model):
+    user = models.TextField(max_length=50, blank=True, null=True)
+    email = models.EmailField(max_length=50)
+    message = models.TextField(max_length=1000)
+
+    class Meta:
+        verbose_name = "Formulaire de contact"
+        verbose_name_plural = "Formulaire de contact"
+
+    def __str__(self):
+        return '%s' % (self.user)

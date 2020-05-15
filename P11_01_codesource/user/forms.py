@@ -56,3 +56,8 @@ class LoginForm(AuthenticationForm):
         fields = ('username', 'password')
 
 
+class ContactForm(forms.Form):
+    user = forms.CharField(label="Nom d'utilisateur", required=False)
+    email = forms.EmailField(required=True, label="Email")
+    message = forms.CharField(widget=forms.Textarea, required=True)
+    
