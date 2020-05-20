@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2f!z6u4y49irx+nu-8r5+16sub10hpfbw^e4o*gjq!g=^sv+j!'
 
-DEBUG=False
+DEBUG = False
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -31,7 +31,7 @@ if os.environ.get('ENV') == 'PRODUCTION':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS =  ['purbeurreapp.herokuapp.com']
+ALLOWED_HOSTS = ['purbeurreapp.herokuapp.com']
 HOSTNAME = "https://purbeurreapp.herokuapp.com/"
 
 # Application definition
@@ -98,17 +98,15 @@ WSGI_APPLICATION = 'nutella.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-          'NAME': 'nutella',
-          'USER': 'yohan',
-          'PASSWORD': 'logitech',
-          'HOST': 'localhost',
-          'PORT': '',
-          'CONN_MAX_AGE': 500,
-      }
-  }
+DATABASES = {'default': {'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                         'NAME': 'nutella',
+                         'USER': 'yohan',
+                         'PASSWORD': 'logitech',
+                         'HOST': 'localhost',
+                         'PORT': '',
+                         'CONN_MAX_AGE': 500
+                         }
+             }
 
 
 # Password validation
@@ -144,11 +142,11 @@ USE_L10N = True
 USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST= 'smtp.gmail.com'
-EMAIL_HOST_USER= 'purbeurre.paris@gmail.com'
-EMAIL_HOST_PASSWORD= 'purbeurreparis75'
-EMAIL_USE_TLS= True
-EMAIL_PORT= 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'purbeurre.paris@gmail.com'
+EMAIL_HOST_PASSWORD = 'purbeurreparis75'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -161,4 +159,3 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'compte'
 LOGIN_URL = 'login'
 django_heroku.settings(locals())
-

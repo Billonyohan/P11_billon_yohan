@@ -3,6 +3,7 @@ from off.models import Food
 import psycopg2
 import requests
 
+
 class OpenFoodFact:
     '''Class that manages the data retrievement'''
     def __init__(self):
@@ -23,7 +24,7 @@ class OpenFoodFact:
             'countries': 'France',
             'json': 1,
             'page': 1
-            }
+        }
         r_food = requests.get('https://fr.openfoodfacts.org/cgi/search.pl', params=parameters)
         food_json = r_food.json()
         data_food = food_json.get('products')

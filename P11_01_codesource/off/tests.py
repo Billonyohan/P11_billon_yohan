@@ -59,10 +59,8 @@ class ViewTest(TestCase):
         request.user = self.user
         tomate = Food.objects.get(food__contains="Tomate")
         poire = Food.objects.get(food__contains="Poire")
-        form = {
-                'saved_substitute': tomate.id,
-                'saved_substitute2': poire.id,
-                }
+        form = {'saved_substitute': tomate.id,
+                'saved_substitute2': poire.id, }
         self.client.force_login(self.user)
         response = self.client.get(reverse('saved_substitute'), form)
         self.assertEqual(response.status_code, 302)

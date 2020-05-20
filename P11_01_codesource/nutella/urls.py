@@ -18,12 +18,11 @@ from django.conf.urls import url, include
 from off import views
 from user import views
 
-urlpatterns = [
-            url(r'^$', views.index, name="index"),
-            url(r'^off/', include('off.urls')),
-            url(r'^admin/', admin.site.urls),
-            url(r'^login$', views.loginView, name='login'),
-            url(r'^nouveau$', views.new_account, name='new_account'),
-            url(r'^compte$', views.account, name='account'),
-            url(r'^logout$', views.logoutView, name='logout')
-            ]
+urlpatterns = [url(r'^$', views.index, name="index"),
+               url(r'^off/', include('off.urls')),
+               url(r'^admin/', admin.site.urls),
+               url(r'^login$', views.loginView, name='login'),
+               url(r'^nouveau$', views.new_account, name='new_account'),
+               url(r'^compte$', views.account, name='account'),
+               url(r'^logout$', views.logoutView, name='logout'),
+               ]

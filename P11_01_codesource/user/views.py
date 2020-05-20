@@ -12,6 +12,7 @@ from user.forms import ContactForm
 
 
 def index(request):
+    """returns main page and send mail from contactform"""
     form = ContactForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
@@ -43,7 +44,7 @@ def index(request):
                 </html>
                 """
             email_info = EmailMessage('Mail from contact!', email_body, to=['purbeurre.paris@gmail.com'])
-            email_info.content_subtype = "html" # this is the crucial part 
+            email_info.content_subtype = "html"
             email_info.send()
             email_info_costumer = EmailMessage('Pure Beurre - Message recu', email_response, to=[email])
             email_info_costumer.content_subtype = "html"
@@ -92,9 +93,7 @@ def loginView(request):
             else:
                 messages.error(request, '/!\\ Erreur sur votre nom d’utilisateur ou votre mot de passe /!\\')
         log = LoginForm()
-        return render(request, 'off/login.html', {
-            'form': log,
-            })
+        return render(request, 'off/login.html', {'form': log})
 
 
 @login_required

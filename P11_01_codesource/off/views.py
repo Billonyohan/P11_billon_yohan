@@ -18,12 +18,12 @@ def result_search(request):
     if foods.count() <= 0:
         return render(request, 'off/result_search.html', {
             'nofoods': "Aucun aliment trouvé !",
-            })
+        })
     else:
         return render(request, 'off/result_search.html', {
             "foods": paginator_food,
             "foods2": query
-            })
+        })
 
 
 def food_details(request):
@@ -32,7 +32,7 @@ def food_details(request):
     foods_details = Food.objects.filter(food__icontains=details)[:1]
     return render(request, 'off/food_details.html', {
         'foods': foods_details,
-        })
+    })
 
 
 def substitute(request):
@@ -48,7 +48,7 @@ def substitute(request):
             'foods_substitute': paginator_substitute,
             'foods_substitute2': foods_substitute2,
             'substitute': foods_substitute
-            })
+        })
     else:
         substitute_food = foods_substitute.split()
         substitute2 = Food.objects.filter(food__contains=substitute_food[0]).order_by('nutriscore').exclude(food__contains=foods_substitute)
@@ -60,11 +60,11 @@ def substitute(request):
                 'foods_substitute': paginator_substitute,
                 'foods_substitute2': foods_substitute2,
                 'substitute': foods_substitute
-                })
+            })
         else:
             return render(request, 'off/substitute.html', {
                 'nosubstitute': "Aucun substitut trouvé !",
-                })
+            })
 
 
 @login_required
@@ -90,7 +90,7 @@ def substitute_saved(request):
     paginator_user = paginator.get_page(page)
     return render(request, 'off/substitute_saved.html', {
         'user': paginator_user,
-        })
+    })
 
 
 def legal(request):

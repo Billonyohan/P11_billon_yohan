@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 class NewAccount(UserCreationForm):
 
     username = forms.CharField(max_length=30, required=True,
-                             label=("Nom d’utilisateur"),
-                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+                               label=("Nom d’utilisateur"),
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     email = forms.EmailField(max_length=150, required=True,
                              label=("Adresse électronique"),
@@ -39,17 +39,9 @@ class NewAccount(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
     """form for user's login"""
-    username = UsernameField(
-            widget=forms.TextInput(attrs={
-                'autofocus': True,
-                'class': 'form-control'})
-    )
-    password = forms.CharField(
-            label=("Password"),
-            strip=False,
-            widget=forms.PasswordInput(attrs={
-                'class': 'form-control'}),
-    )
+    username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control'}))
+    password = forms.CharField(label=("Password"), strip=False,
+                               widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
@@ -57,7 +49,7 @@ class LoginForm(AuthenticationForm):
 
 
 class ContactForm(forms.Form):
+    """ form for send mail """
     user = forms.CharField(label="Nom d'utilisateur", required=False)
     email = forms.EmailField(required=True, label="Email")
     message = forms.CharField(widget=forms.Textarea, required=True)
-    
