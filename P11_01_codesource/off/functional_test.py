@@ -19,6 +19,4 @@ message.send_keys('Ca marche !')
 
 #submitting the form
 submit.send_keys(Keys.RETURN)
-#check the returned result
-assert 'Check your email' in selenium.page_source
 selenium.quit()
