@@ -1,7 +1,7 @@
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time 
+import time
 
 
 class FormContactTest(unittest.TestCase):
@@ -41,6 +41,7 @@ class OffButtonTest(unittest.TestCase):
         submit = selenium.find_element_by_name('offButton')
         submit.send_keys(Keys.RETURN)
         time.sleep(5)
+
 
 if __name__ == "__main__":
     unittest.main()
