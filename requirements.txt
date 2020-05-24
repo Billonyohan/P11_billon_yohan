@@ -5,6 +5,10 @@ Django==3.0.4
 django-heroku==0.3.1
 gunicorn==20.0.4
 psycopg2==2.8.4
+pycodestyle==2.6.0
 pytz==2019.3
+selenium==3.9.0
+sendmail==2.0
 sqlparse==0.3.1
+urllib3==1.25.9
 whitenoise==5.0.1
